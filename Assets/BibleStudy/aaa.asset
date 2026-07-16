@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 125b9f6e6906d6e4897a443b3c12729c, type: 3}
+  m_Name: aaa
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: c68bed8cd4c286442976821155954812, type: 2}
+  mSprites:
+  - name: BibleIconA
+    x: 0
+    y: 199
+    width: 313
+    height: 313
+    borderLeft: 184
+    borderRight: 124
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 4
+    paddingRight: 3
+    paddingTop: 4
+    paddingBottom: 3
+  - name: Left
+    x: 318
+    y: 163
+    width: 215
+    height: 349
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 143
+    paddingRight: 142
+    paddingTop: 76
+    paddingBottom: 75
+  - name: Quit
+    x: 0
+    y: 75
+    width: 118
+    height: 119
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 5
+    paddingTop: 5
+    paddingBottom: 4
+  - name: Right
+    x: 538
+    y: 176
+    width: 222
+    height: 336
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 139
+    paddingRight: 139
+    paddingTop: 82
+    paddingBottom: 82
+  mPixelSize: 1
+  mReplacement: {fileID: 0}
