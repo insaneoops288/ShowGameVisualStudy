@@ -1933,7 +1933,7 @@ static public class NGUIEditorTools
 		var id = GetClassID(type);
 		var ob = new SerializedObject(mb);
 		ob.Update();
-		ob.FindProperty("m_Script").objectReferenceEntityIdValue = id;
+		// ob.FindProperty("m_Script").objectReferenceEntityIdValue = id;
 		ob.ApplyModifiedProperties();
 		ob.Update();
 		return ob;
@@ -1947,7 +1947,7 @@ static public class NGUIEditorTools
 	{
 		var ob = new SerializedObject(mb);
 		ob.Update();
-		ob.FindProperty("m_Script").objectReferenceEntityIdValue = classID;
+		// ob.FindProperty("m_Script").objectReferenceEntityIdValue = classID;
 		ob.ApplyModifiedProperties();
 		ob.Update();
 		return ob;
@@ -1959,7 +1959,7 @@ static public class NGUIEditorTools
 
 	static public void ReplaceClass (SerializedObject ob, int classID)
 	{
-		ob.FindProperty("m_Script").objectReferenceEntityIdValue = classID;
+		// ob.FindProperty("m_Script").objectReferenceEntityIdValue = classID;
 		ob.ApplyModifiedProperties();
 		ob.Update();
 	}
@@ -1970,7 +1970,7 @@ static public class NGUIEditorTools
 
 	static public void ReplaceClass (SerializedObject ob, System.Type type)
 	{
-		ob.FindProperty("m_Script").objectReferenceEntityIdValue = GetClassID(type);
+		// ob.FindProperty("m_Script").objectReferenceEntityIdValue = GetClassID(type);
 		ob.ApplyModifiedProperties();
 		ob.Update();
 	}
@@ -2227,7 +2227,7 @@ static public class NGUIEditorTools
 		}
 
 		int id = (int)s_GetInstanceIDFromGUID.Invoke(null, new object[] { guid });
-		if (id != 0) return EditorUtility.EntityIdToObject(id);
+		// if (id != 0) return EditorUtility.EntityIdToObject(id);
 		string path = AssetDatabase.GUIDToAssetPath(guid);
 		if (string.IsNullOrEmpty(path)) return null;
 		return AssetDatabase.LoadAssetAtPath(path, typeof(Object));
