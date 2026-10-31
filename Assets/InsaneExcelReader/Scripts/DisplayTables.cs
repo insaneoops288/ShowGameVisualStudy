@@ -14,6 +14,7 @@ public class DisplayTables : MonoBehaviour
     bool canShowHackNSlash = false;
     bool canShowNewTestament = false;
     bool canShowOldTestament = false;
+    bool canShowPhantom = false;
     bool canShowPlayer = false;
     bool canShowTestimony = false;
     bool canShowWiseSaying = false;
@@ -24,6 +25,7 @@ public class DisplayTables : MonoBehaviour
         canShowHackNSlash = false;
         canShowNewTestament = false;
         canShowOldTestament = false;
+        canShowPhantom = false;
         canShowPlayer = false;
         canShowTestimony = false;
         canShowWiseSaying = false;
@@ -120,6 +122,27 @@ public class DisplayTables : MonoBehaviour
         foreach (var item in OldTestamentList)
             Debug.Log(string.Format("m_ID = {0},m_English = {1},m_Korean = {2},m_Count = {3},m_EnglishTarget = {4},m_NIV = {5},m_KoreanTarget = {6},m_Source = {7},m_EasyBible = {8},m_RevisedHangul = {9},m_RevisedRevision = {10},m_JointTranslation = {11},m_NewStandardTranslation = {12},m_KoreanBible = {13},m_SourceEnglish = {14},m_KJV = {15},m_NewKJV = {16},m_ESV = {17},m_NewRSV = {18},m_NASB = {19}," ,item.m_ID ,item.m_English ,item.m_Korean ,item.m_Count ,item.m_EnglishTarget ,item.m_NIV ,item.m_KoreanTarget ,item.m_Source ,item.m_EasyBible ,item.m_RevisedHangul ,item.m_RevisedRevision ,item.m_JointTranslation ,item.m_NewStandardTranslation ,item.m_KoreanBible ,item.m_SourceEnglish ,item.m_KJV ,item.m_NewKJV ,item.m_ESV ,item.m_NewRSV ,item.m_NASB));
 
+        var PhantomAll = PhantomTable.GetAll();
+        var PhantomIndex = PhantomTable.GetByIndex(0);
+        var PhantomKey = PhantomTable.GetByKey("Game0001");
+        var PhantomList = PhantomTable.GetAllList();
+
+        Debug.Log(" < ---PhantomTable Dictionary --->");
+
+        foreach (var item in PhantomAll)
+            Debug.Log(string.Format("Key = {0}, m_ID = {1},m_Confirm = {2},m_Address = {3},m_Content = {4},", item.Key ,item.Value.m_ID ,item.Value.m_Confirm ,item.Value.m_Address ,item.Value.m_Content));
+
+        Debug.Log(" < ---PhantomTable Dictionary Index --->");
+        Debug.Log(string.Format("m_ID = {0},m_Confirm = {1},m_Address = {2},m_Content = {3}," ,PhantomIndex.m_ID ,PhantomIndex.m_Confirm ,PhantomIndex.m_Address ,PhantomIndex.m_Content));
+
+        Debug.Log(" < ---PhantomTable Dictionary Key --->");
+        Debug.Log(string.Format("m_ID = {0},m_Confirm = {1},m_Address = {2},m_Content = {3}," ,PhantomKey.m_ID ,PhantomKey.m_Confirm ,PhantomKey.m_Address ,PhantomKey.m_Content));
+
+        Debug.Log(" < ---PhantomTable List --->");
+
+        foreach (var item in PhantomList)
+            Debug.Log(string.Format("m_ID = {0},m_Confirm = {1},m_Address = {2},m_Content = {3}," ,item.m_ID ,item.m_Confirm ,item.m_Address ,item.m_Content));
+
         var PlayerAll = PlayerTable.GetAll();
         var PlayerIndex = PlayerTable.GetByIndex(0);
         var PlayerKey = PlayerTable.GetByKey("Bible0001");
@@ -215,6 +238,12 @@ public class DisplayTables : MonoBehaviour
                     {
                         Init();
                         canShowOldTestament = true;
+                    }
+
+                    if (GUILayout.Button("Phantom", GUILayout.Width(200), GUILayout.Height(30)))
+                    {
+                        Init();
+                        canShowPhantom = true;
                     }
 
                     if (GUILayout.Button("Player", GUILayout.Width(200), GUILayout.Height(30)))
@@ -388,6 +417,38 @@ public class DisplayTables : MonoBehaviour
                                     GUILayout.TextField("ESV: " + info.Value.m_ESV.ToString(), GUI.skin.box, GUILayout.Width(150), GUILayout.Height(30));
                                     GUILayout.TextField("NewRSV: " + info.Value.m_NewRSV.ToString(), GUI.skin.box, GUILayout.Width(150), GUILayout.Height(30));
                                     GUILayout.TextField("NASB: " + info.Value.m_NASB.ToString(), GUI.skin.box, GUILayout.Width(150), GUILayout.Height(30));
+                                }
+                                GUILayout.EndHorizontal();
+                            }
+                        }
+                        GUILayout.EndVertical();
+                    }
+                    GUILayout.EndScrollView();
+                }
+            }
+            GUILayout.EndArea();
+        }
+
+        if (canShowPhantom)
+        {
+            GUILayout.BeginArea(m_rectTable, GUI.skin.box);
+            {
+                if (PhantomTable.GetAll().Count > 0)
+                {
+                    m_scrollPosTable = GUILayout.BeginScrollView(m_scrollPosTable, true, true);
+                    {
+                        GUILayout.BeginVertical(GUI.skin.box);
+                        {
+                            foreach (var info in PhantomTable.GetAll())
+                            {
+                                GUILayout.BeginHorizontal(GUI.skin.box);
+                                {
+                                    GUILayout.TextField("Key: " + info.Key.ToString(), GUI.skin.box, GUILayout.Width(200), GUILayout.Height(30));
+                                    GUILayout.TextField("", GUI.skin.box, GUILayout.Width(30), GUILayout.Height(30));
+                                    GUILayout.TextField("ID: " + info.Value.m_ID.ToString(), GUI.skin.box, GUILayout.Width(150), GUILayout.Height(30));
+                                    GUILayout.TextField("Confirm: " + info.Value.m_Confirm.ToString(), GUI.skin.box, GUILayout.Width(150), GUILayout.Height(30));
+                                    GUILayout.TextField("Address: " + info.Value.m_Address.ToString(), GUI.skin.box, GUILayout.Width(150), GUILayout.Height(30));
+                                    GUILayout.TextField("Content: " + info.Value.m_Content.ToString(), GUI.skin.box, GUILayout.Width(150), GUILayout.Height(30));
                                 }
                                 GUILayout.EndHorizontal();
                             }

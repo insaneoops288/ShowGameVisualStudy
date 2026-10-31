@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class BibleTestimony : MonoBehaviour
 {
     private static BibleTestimony m_Instance = null;
 
     public static BibleTestimony Get { get { return m_Instance; } set { m_Instance = value; } }
- 
+
+
+    public UILabel LabelVersion;
 
     public List<Transform> InitItem = new List<Transform>();
 
@@ -40,6 +40,35 @@ public class BibleTestimony : MonoBehaviour
         m_Instance = this; 
     }
 
+    void Start()
+    {
+        TestimonyInfos.Clear();
+
+        TestimonyInfos = HackNSlashTable.GetAllList();
+
+        string VersionInfo = "Game Visual 6000.6.7f1";
+        m_LabelJustTest.text = VersionInfo;
+
+        m_BibleItemTestimonies = m_UIGridTestimony.GetComponentsInChildren<BibleItemTestimony>().ToList();
+
+        for (int i = 0; i < m_BibleItemTestimonies.Count; i++)
+        {
+            m_BibleItemTestimonies[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < m_BibleItemTestimonies.Count; i++)
+        {
+            m_BibleItemTestimonies[i].m_UILabelBibleName.text = "";
+        }
+
+        for (int i = 0; i < m_BibleItemTestimonies.Count; i++)
+        {
+            Buttons.Add(m_BibleItemTestimonies[i].GetComponentInChildren<UISprite>());
+        }
+
+        InitButton();
+    }
+
     public void Init()
     {
 
@@ -65,8 +94,6 @@ public class BibleTestimony : MonoBehaviour
 
     public void SpawnItem()
     {
-        // m_LabelJustTest.text = "" + CollectTestimonyInfos.Count;
-
         for (int i = 0; i < m_BibleItemTestimonies.Count; i++)
         {
             m_BibleItemTestimonies[i].gameObject.SetActive(true);
@@ -190,156 +217,7 @@ public class BibleTestimony : MonoBehaviour
 
         for (int i = 0; i < TestimonyInfos.Count; i++)
         {
-            if (TestimonyInfos[i].m_Confirm == "Confirm")
-            {
-                CollectTestimonyInfos.Add(TestimonyInfos[i]);
-            }
-        }
-
-        SpawnItem();
-    }
-
-    public void ButtonTestimonySin()
-    {
-        Init();
-        InitButton();
-        CollectTestimonyInfos.Clear();
-
-        for (int i = 0; i < TestimonyInfos.Count; i++)
-        {
-            if (TestimonyInfos[i].m_Confirm == "Sin")
-            {
-                CollectTestimonyInfos.Add(TestimonyInfos[i]);
-            }
-        }
-
-        SpawnItem();
-    }
-
-    public void ButtonTestimonySexual()
-    {
-        Init();
-        InitButton();
-        CollectTestimonyInfos.Clear();
-
-        for (int i = 0; i < TestimonyInfos.Count; i++)
-        {
-            if (TestimonyInfos[i].m_Confirm == "Sexual")
-            {
-                CollectTestimonyInfos.Add(TestimonyInfos[i]);
-            }
-        }
-
-        SpawnItem();
-    }
-
-    public void ButtonTestimonyGodPrayer()
-    {
-        Init();
-        InitButton();
-        CollectTestimonyInfos.Clear();
-
-        for (int i = 0; i < TestimonyInfos.Count; i++)
-        {
-            if (TestimonyInfos[i].m_Confirm == "GodPrayer")
-            {
-                CollectTestimonyInfos.Add(TestimonyInfos[i]);
-            }
-        }
-
-        SpawnItem();
-    }
-
-    public void ButtonTestimonChurch()
-    {
-        Init();
-        InitButton();
-        CollectTestimonyInfos.Clear();
-
-        for (int i = 0; i < TestimonyInfos.Count; i++)
-        {
-            if (TestimonyInfos[i].m_Confirm == "Church")
-            {
-                CollectTestimonyInfos.Add(TestimonyInfos[i]);
-            }
-        }
-
-        SpawnItem();
-    }
-
-    public void ButtonTestimonTithe()
-    {
-        Init();
-        InitButton();
-        CollectTestimonyInfos.Clear();
-
-        for (int i = 0; i < TestimonyInfos.Count; i++)
-        {
-            if (TestimonyInfos[i].m_Confirm == "Tithe")
-            {
-                CollectTestimonyInfos.Add(TestimonyInfos[i]);
-            }
-        }
-
-        SpawnItem();
-    }
-
-    public void ButtonTestimonGlory()
-    {
-        Init();
-        InitButton();
-        CollectTestimonyInfos.Clear();
-
-        for (int i = 0; i < TestimonyInfos.Count; i++)
-        {
-            if (TestimonyInfos[i].m_Confirm == "Glory")
-            {
-                CollectTestimonyInfos.Add(TestimonyInfos[i]);
-            }
-        }
-
-        SpawnItem();
-
-
-        //CollectTestimonyInfos.Clear();
-
-        //for (int i = 0; i < TestimonyInfos.Count; i++)
-        //{
-        //    //if (TestimonyInfos[i].m_Confirm == "Glory")
-        //    //{
-        //        CollectTestimonyInfos.Add(TestimonyInfos[i]);
-        //    //}
-        //}
-
-        //SpawnItem();
-    }
-
-    public void ButtonTestimonParable()
-    {
-        Init();
-        InitButton();
-        CollectTestimonyInfos.Clear();
-
-        for (int i = 0; i < TestimonyInfos.Count; i++)
-        {
-            if (TestimonyInfos[i].m_Confirm == "Parable")
-            {
-                CollectTestimonyInfos.Add(TestimonyInfos[i]);
-            }
-        }
-
-        SpawnItem();
-    }
-
-    public void ButtonTestimonFaith()
-    {
-        Init();
-        InitButton();
-        CollectTestimonyInfos.Clear();
-
-        for (int i = 0; i < TestimonyInfos.Count; i++)
-        {
-            if (TestimonyInfos[i].m_Confirm == "Faith")
+            if (TestimonyInfos[i].m_Confirm == "Phantom")
             {
                 CollectTestimonyInfos.Add(TestimonyInfos[i]);
             }
@@ -356,38 +234,4 @@ public class BibleTestimony : MonoBehaviour
             Buttons[i].color = new Color(1, 1, 1, 1);
         }
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        TestimonyInfos.Clear();
-
-        TestimonyInfos = HackNSlashTable.GetAllList();
-
-        //TestimonyPrayerInfos.Clear();
-
-        //TestimonyPrayerInfos = PlayerTable.GetAllList();
-
-        m_BibleItemTestimonies = m_UIGridTestimony.GetComponentsInChildren<BibleItemTestimony>().ToList();
-
-        for (int i = 0; i < m_BibleItemTestimonies.Count; i++)
-        {
-            m_BibleItemTestimonies[i].gameObject.SetActive(false);
-        }
-
-        for (int i = 0; i < m_BibleItemTestimonies.Count; i++)
-        {
-            m_BibleItemTestimonies[i].m_UILabelBibleName.text = "";
-        }
-
-        for (int i = 0; i < m_BibleItemTestimonies.Count; i++)
-        {
-            Buttons.Add(m_BibleItemTestimonies[i].GetComponentInChildren<UISprite>());
-        }
-
-        InitButton();
-    }
-
-
-
 }

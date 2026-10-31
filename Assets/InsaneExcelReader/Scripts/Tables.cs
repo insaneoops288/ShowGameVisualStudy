@@ -115,6 +115,19 @@ public class OldTestamentInfo
     public void SetNASB(string NASB) { m_NASB = NASB; }
 }
 
+public class PhantomInfo
+{
+    public string m_ID { get; private set; }
+    public string m_Confirm { get; private set; }
+    public string m_Address { get; private set; }
+    public string m_Content { get; private set; }
+
+    public void SetID(string ID) { m_ID = ID; }
+    public void SetConfirm(string Confirm) { m_Confirm = Confirm; }
+    public void SetAddress(string Address) { m_Address = Address; }
+    public void SetContent(string Content) { m_Content = Content; }
+}
+
 public class PlayerInfo
 {
     public string m_ID { get; private set; }
@@ -412,6 +425,63 @@ public class OldTestamentTable
     }
 }
 
+public class PhantomTable
+{
+    private static Dictionary<string, PhantomInfo> Table = new Dictionary<string, PhantomInfo>();
+
+    public static Dictionary<string, PhantomInfo> GetAll()
+    {
+        return Table;
+    }
+
+    public static PhantomInfo GetByKey(string key)
+    {
+        PhantomInfo value;
+
+        if (Table.TryGetValue(key, out value))
+            return value;
+
+        return null;
+    }
+
+    public static PhantomInfo GetByIndex(int index)
+    {
+        return Table.Values.ElementAt(index);
+    }
+
+    public static List<PhantomInfo> GetAllList()
+    {
+        return Table.Values.ToList();
+    }
+
+    public PhantomTable()
+    {
+        InitTable();
+    }
+
+    private void InitTable()
+    {
+        TextAsset textAsset = Resources.Load("Tables/Phantom") as TextAsset;
+        MemoryStream memoryStream = new MemoryStream(textAsset.bytes);
+        BinaryReader binaryReader = new BinaryReader(memoryStream);
+
+        int tableCount = binaryReader.ReadInt32();
+
+        for( int i = 0; i < tableCount; ++i)
+        {
+            string key = binaryReader.ReadString();
+
+            PhantomInfo info = new PhantomInfo();
+            info.SetID(binaryReader.ReadString());
+            info.SetConfirm(binaryReader.ReadString());
+            info.SetAddress(binaryReader.ReadString());
+            info.SetContent(binaryReader.ReadString());
+
+            Table.Add(key, info);
+        }
+    }
+}
+
 public class PlayerTable
 {
     private static Dictionary<string, PlayerInfo> Table = new Dictionary<string, PlayerInfo>();
@@ -590,6 +660,7 @@ public class Tables : MonoBehaviour
     public HackNSlashTable HackNSlash = null;
     public NewTestamentTable NewTestament = null;
     public OldTestamentTable OldTestament = null;
+    public PhantomTable Phantom = null;
     public PlayerTable Player = null;
     public TestimonyTable Testimony = null;
     public WiseSayingTable WiseSaying = null;
@@ -611,6 +682,7 @@ public class Tables : MonoBehaviour
             HackNSlash = new HackNSlashTable();
             NewTestament = new NewTestamentTable();
             OldTestament = new OldTestamentTable();
+            Phantom = new PhantomTable();
             Player = new PlayerTable();
             Testimony = new TestimonyTable();
             WiseSaying = new WiseSayingTable();
