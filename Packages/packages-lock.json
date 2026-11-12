@@ -10,7 +10,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.collab-proxy": {
-      "version": "2.13.6",
+      "version": "2.14.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -130,7 +130,7 @@
       }
     },
     "com.unity.visualscripting": {
-      "version": "1.9.12",
+      "version": "1.9.13",
       "depth": 0,
       "source": "registry",
       "dependencies": {
